@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Singular - Educação Corporativa</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deep: {
+                            900: '#020B1C', // Fundo do mar profundo
+                            800: '#0A1933', // Azul corporativo escuro
+                            700: '#11294F',
+                            600: '#1A3B6E',
+                        },
+                        ocean: {
+                            500: '#005f99',
+                            400: '#0077b6',
+                            300: '#0096c7', // Ciano corporativo
+                            100: '#caf0f8', // Espuma
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to bottom, rgba(2, 11, 28, 0.8), rgba(2, 11, 28, 0.95)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop')",
+                        'mandala-pattern': "radial-gradient(circle at center, #1A3B6E 0%, #020B1C 70%)"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations & Styles */
+        body {
+            background-color: #020B1C;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 150, 199, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #0096c7;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Bubble/Particle Animation */
+        .bubble {
+            position: absolute;
+            background: rgba(0, 150, 199, 0.1);
+            border-radius: 50%;
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Ticker Animation */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020B1C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A3B6E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0096c7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="fixed w-full z-50 bg-deep-900/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer" onclick="showPage('home')">
+                    <span class="text-2xl font-bold text-white tracking-wider">ID <span class="text-ocean-300">SINGULAR</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 text-sm uppercase tracking-widest">
+                        <a href="#" onclick="showPage('home')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Home</a>
+                        <a href="#" onclick="showPage('educacao')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Educação Corporativa</a>
+                        <a href="#" onclick="showPage('id-singular')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">ID Singular</a>
+                        <a href="#" onclick="showPage('cases')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Cases</a>
+                        <a href="#" onclick="showPage('conteudos')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Conteúdos</a>
+                        <button onclick="showPage('contato')" class="bg-ocean-500 hover:bg-ocean-400 text-white px-5 py-2 rounded-full transition duration-300 transform hover:scale-105">Contato</button>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-deep-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" onclick="showPage('home')" class="block px-3 py-2 text-base font-medium text-white hover:bg-deep-700">Home</a>
+                <a href="#" onclick="showPage('educacao')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Educação Corporativa</a>
+                <a href="#" onclick="showPage('id-singular')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">ID Singular</a>
+                <a href="#" onclick="showPage('cases')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Cases</a>
+                <a href="#" onclick="showPage('conteudos')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Conteúdos</a>
+                <a href="#" onclick="showPage('contato')" class="block px-3 py-2 text-base font-medium text-ocean-300 font-bold">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <main id="main-content" class="pt-20">
+        
+        <!-- PAGE: HOME -->
+        <div id="page-home" class="page-section">
+            <!-- Hero -->
+            <section class="relative h-screen flex items-center justify-center bg-hero-pattern bg-cover bg-center">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-deep-900"></div>
+                <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-section">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        Transforme sua <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-ocean-300 to-white">Autoridade</span> de Mercado
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        Elevamos a educação corporativa e o branding da sua empresa através da Metodologia Singular.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="showPage('educacao')" class="px-8 py-4 border border-white text-white rounded-full hover:bg-white hover:text-deep-900 transition duration-300">
+                            Conheça a Solução
+                        </button>
+                        <button onclick="scrollToSection('conversao-home')" class="px-8 py-4 bg-ocean-500 text-white rounded-full hover:bg-ocean-400 transition duration-300 shadow-lg shadow-ocean-500/20">
+                            Quero levar para minha empresa
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sobre ID Singular (Resumo) -->
+            <section class="py-20 bg-deep-900 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-section">
+                        <span class="text-ocean-300 uppercase tracking-widest text-sm font-semibold">Quem Somos</span>
+                        <h2 class="text-4xl font-bold text-white mt-2 mb-6">Educação Corporativa Personalizada e Metodologia Singular</h2>
+                        <p class="text-gray-400 mb-6">
+                            Não entregamos apenas treinamentos, construímos ecossistemas de aprendizagem que reforçam a identidade da sua marca. Nossa metodologia exclusiva mergulha no DNA da sua empresa.
+                        </p>
+                        <button onclick="showPage('educacao')" class="flex items-center text-ocean-300 font-semibold hover:text-white transition">
+                            Saiba mais sobre Educação Corporativa <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div class="relative fade-in-section">
+                        <!-- Abstract Visual -->
+                        <div class="aspect-square rounded-full bg-gradient-to-tr from-ocean-600/20 to-transparent border border-white/10 relative animate-pulse">
+                            <div class="absolute inset-8 rounded-full border border-ocean-300/30"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="fingerprint" class="w-32 h-32 text-ocean-300/50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Autoridade & Big Numbers -->
+            <section class="py-20 bg-deep-800">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 fade-in-section">
+                        <div class="p-6">
+                            <div class="text-5xl font-bold text-ocean-300 mb-2">+150</div>
+                            <div class="text-gray-400">Projetos Entregues</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-5xl font-bold text-ocean-300 mb-2">50k</div>
+                            <div class="text-gray-400">Colaboradores Impactados</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-5xl font-bold text-ocean-300 mb-2">12</div>
+                            <div class="text-gray-400">Anos de Mercado</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Logos Placeholder -->
+                    <div class="flex flex-wrap justify-center gap-12 opacity-60 grayscale hover:grayscale-0 transition duration-500 fade-in-section">
+                        <div class="text-2xl font-bold text-white">EMPRESA A</div>
+                        <div class="text-2xl font-bold text-white">EMPRESA B</div>
+                        <div class="text-2xl font-bold text-white">CORPORATION X</div>
+                        <div class="text-2xl font-bold text-white">GRUPO Y</div>
+                    </div>
+
+                    <div class="mt-16">
+                        <button onclick="scrollToSection('conversao-home')" class="px-8 py-3 bg-white text-deep-900 rounded-full font-bold hover:bg-gray-200 transition">
+                            Falar com um consultor
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cases Preview -->
+            <section class="py-20 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="flex justify-between items-end mb-12 fade-in-section">
+                        <div>
+                            <span class="text-ocean-300 uppercase tracking-widest text-sm">Portfólio</span>
+                            <h2 class="text-3xl font-bold text-white mt-2">Transformações Reais</h2>
+                        </div>
+                        <button onclick="showPage('cases')" class="hidden md:block text-white hover:text-ocean-300 transition">Ver todos os cases</button>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 fade-in-section">
+                        <!-- Case Card 1 -->
+                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group" onclick="showPage('cases')">
+                            <div class="h-48 bg-gray-700 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Case" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2">Reestruturação Tech</h3>
+                                <p class="text-sm text-gray-400">Desenvolvimento de lideranças ágeis para unicórnio brasileiro.</p>
+                            </div>
+                        </div>
+                        <!-- Case Card 2 -->
+                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group" onclick="showPage('cases')">
+                            <div class="h-48 bg-gray-700 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Case" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2">Cultura de Inovação</h3>
+                                <p class="text-sm text-gray-400">Programa de onboarding gamificado para setor financeiro.</p>
+                            </div>
+                        </div>
+                         <!-- Case Card 3 -->
+                         <div class="glass-card rounded-xl overflow-hidden cursor-pointer group" onclick="showPage('cases')">
+                            <div class="h-48 bg-gray-700 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Case" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2">Varejo 4.0</h3>
+                                <p class="text-sm text-gray-400">Treinamento de ponta a ponta para rede de franquias.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center md:hidden">
+                        <button onclick="showPage('cases')" class="text-white hover:text-ocean-300 transition">Ver todos os cases</button>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Fechamento / Conversão -->
+             <section id="conversao-home" class="py-20 bg-gradient-to-r from-deep-800 to-ocean-900 border-t border-white/5">
+                <div class="max-w-4xl mx-auto px-4 text-center fade-in-section">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para mergulhar no futuro da sua empresa?</h2>
+                    <p class="text-gray-300 mb-8">Solicite um diagnóstico gratuito e descubra como a ID Singular pode transformar seus resultados.</p>
+                    
+                    <form class="max-w-md mx-auto space-y-4 text-left bg-white/5 p-6 rounded-xl backdrop-blur-sm">
+                        <div>
+                            <label class="block text-xs uppercase text-gray-400 mb-1">Nome</label>
+                            <input type="text" class="w-full bg-deep-900 border border-gray-700 rounded p-2 text-white focus:border-ocean-300 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase text-gray-400 mb-1">E-mail Corporativo</label>
+                            <input type="email" class="w-full bg-deep-900 border border-gray-700 rounded p-2 text-white focus:border-ocean-300 outline-none">
+                        </div>
+                        <button type="submit" class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-3 rounded transition mt-4">
+                            Enviar Solicitação
+                        </button>
+                    </form>
+
+                    <div class="mt-12 pt-8 border-t border-white/10">
+                        <p class="text-sm text-gray-400 mb-4">Ou assine nossa newsletter para receber insights exclusivos</p>
+                        <div class="flex max-w-sm mx-auto">
+                            <input type="email" placeholder="Seu melhor e-mail" class="flex-1 bg-transparent border border-gray-600 rounded-l px-4 py-2 text-white outline-none">
+                            <button class="bg-white text-deep-900 px-6 py-2 rounded-r font-bold hover:bg-gray-200">Assinar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: EDUCAÇÃO CORPORATIVA -->
+        <div id="page-educacao" class="page-section hidden">
+            <!-- Hero LP -->
+            <section class="py-24 bg-deep-800 relative">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
+                    <div class="fade-in-section">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Desenvolva Talentos, <br>Impulsione <span class="text-ocean-300">Resultados</span></h1>
+                        <p class="text-lg text-gray-300 mb-8">Soluções de aprendizagem desenhadas sob medida para os desafios estratégicos do seu negócio.</p>
+                        <button onclick="scrollToSection('form-educacao')" class="px-8 py-3 bg-ocean-500 text-white rounded-full font-bold hover:bg-ocean-400 transition shadow-lg shadow-ocean-500/30">
+                            Falar com especialista
+                        </button>
+                    </div>
+                    <div class="fade-in-section">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" class="rounded-2xl shadow-2xl border border-white/10 transform rotate-2 hover:rotate-0 transition duration-500" alt="Team">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ticker Marcas -->
+            <div class="ticker-wrap py-4 border-y border-white/5">
+                <div class="ticker text-gray-500 font-bold text-xl uppercase tracking-widest">
+                    <span class="mx-8">Google</span>
+                    <span class="mx-8">Amazon</span>
+                    <span class="mx-8">Microsoft</span>
+                    <span class="mx-8">Spotify</span>
+                    <span class="mx-8">Nubank</span>
+                    <span class="mx-8">Itaú</span>
+                    <span class="mx-8">Salesforce</span>
+                    <span class="mx-8">Google</span>
+                    <span class="mx-8">Amazon</span>
+                    <span class="mx-8">Microsoft</span>
+                    <span class="mx-8">Spotify</span>
+                </div>
+            </div>
+
+            <!-- Jornada Singular -->
+            <section class="py-20 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-12 fade-in-section">A Jornada Singular</h2>
+                    <div class="grid md:grid-cols-4 gap-4 fade-in-section">
+                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
+                            <div class="text-ocean-300 text-4xl mb-4 font-bold">01</div>
+                            <h3 class="text-xl font-bold text-white mb-2">Diagnóstico</h3>
+                            <p class="text-sm text-gray-400">Imersão profunda na cultura e dores.</p>
+                        </div>
+                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
+                            <div class="text-ocean-300 text-4xl mb-4 font-bold">02</div>
+                            <h3 class="text-xl font-bold text-white mb-2">Design</h3>
+                            <p class="text-sm text-gray-400">Co-criação da trilha de aprendizagem.</p>
+                        </div>
+                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
+                            <div class="text-ocean-300 text-4xl mb-4 font-bold">03</div>
+                            <h3 class="text-xl font-bold text-white mb-2">Entrega</h3>
+                            <p class="text-sm text-gray-400">Workshops, EAD e Gamificação.</p>
+                        </div>
+                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
+                            <div class="text-ocean-300 text-4xl mb-4 font-bold">04</div>
+                            <h3 class="text-xl font-bold text-white mb-2">Sustentação</h3>
+                            <p class="text-sm text-gray-400">Mensuração de ROI e acompanhamento.</p>
+                        </div>
+                    </div>
+                    <button class="mt-12 px-8 py-3 border border-ocean-300 text-ocean-300 rounded-full hover:bg-ocean-300 hover:text-deep-900 transition">
+                        Conheça os detalhes
+                    </button>
+                </div>
+            </section>
+
+            <!-- Metodologia (Mandala) -->
+            <section class="py-24 bg-deep-800 overflow-hidden relative">
+                <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 md:order-1 relative flex justify-center fade-in-section">
+                        <!-- Abstract Mandala CSS -->
+                        <div class="w-80 h-80 rounded-full border border-ocean-300/20 relative animate-[spin_60s_linear_infinite]">
+                            <div class="absolute inset-4 rounded-full border border-ocean-300/30"></div>
+                            <div class="absolute inset-8 rounded-full border border-ocean-300/40"></div>
+                            <div class="absolute inset-16 rounded-full bg-ocean-900/50 backdrop-blur-sm flex items-center justify-center">
+                                <span class="text-white font-bold tracking-widest">METODOLOGIA</span>
+                            </div>
+                            <!-- Orbiting dots -->
+                            <div class="absolute top-0 left-1/2 w-3 h-3 bg-ocean-300 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="absolute bottom-0 left-1/2 w-3 h-3 bg-white rounded-full -translate-x-1/2 translate-y-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 fade-in-section">
+                        <span class="text-ocean-300 uppercase tracking-widest text-sm font-semibold">O Coração da ID</span>
+                        <h2 class="text-4xl font-bold text-white mt-2 mb-6">Metodologia Mandala</h2>
+                        <p class="text-gray-400 mb-6">
+                            Nossa abordagem é cíclica e expansiva. Integramos o indivíduo (centro), a equipe (camada média) e a organização (camada externa), garantindo que o aprendizado flua em todas as direções.
+                        </p>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-300 mr-3"></i> Foco no Humano</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-300 mr-3"></i> Aprendizagem Ativa</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-300 mr-3"></i> Dados & Analytics</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Arautos Section -->
+            <section class="py-20 bg-deep-900 relative">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-4 fade-in-section">Os Arautos da Mudança</h2>
+                    <p class="text-gray-400 mb-12 max-w-2xl mx-auto fade-in-section">Formamos multiplicadores internos que carregam a tocha do conhecimento e garantem a perenidade da cultura de aprendizagem.</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 fade-in-section">
+                        <div class="bg-deep-800 p-8 rounded-xl border-t-4 border-ocean-500">
+                            <i data-lucide="mic-2" class="w-10 h-10 text-white mb-4"></i>
+                            <h3 class="text-lg font-bold text-white">Comunicadores</h3>
+                        </div>
+                        <div class="bg-deep-800 p-8 rounded-xl border-t-4 border-ocean-400">
+                            <i data-lucide="compass" class="w-10 h-10 text-white mb-4"></i>
+                            <h3 class="text-lg font-bold text-white">Facilitadores</h3>
+                        </div>
+                        <div class="bg-deep-800 p-8 rounded-xl border-t-4 border-ocean-300">
+                            <i data-lucide="award" class="w-10 h-10 text-white mb-4"></i>
+                            <h3 class="text-lg font-bold text-white">Mentores</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="py-20 bg-deep-800">
+                <div class="max-w-3xl mx-auto px-4 fade-in-section">
+                    <h2 class="text-3xl font-bold text-white mb-8 text-center">Dúvidas Frequentes</h2>
+                    <div class="space-y-4">
+                        <details class="group bg-deep-900 rounded-lg p-4 cursor-pointer">
+                            <summary class="flex justify-between items-center font-medium text-white list-none">
+                                <span>Os treinamentos são presenciais ou online?</span>
+                                <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                            </summary>
+                            <p class="text-gray-400 mt-4 text-sm group-open:animate-fadeIn">
+                                Atuamos no modelo híbrido, presencial e 100% online, dependendo da necessidade e distribuição geográfica do seu time.
+                            </p>
+                        </details>
+                        <details class="group bg-deep-900 rounded-lg p-4 cursor-pointer">
+                            <summary class="flex justify-between items-center font-medium text-white list-none">
+                                <span>Como medimos o ROI do treinamento?</span>
+                                <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                            </summary>
+                            <p class="text-gray-400 mt-4 text-sm group-open:animate-fadeIn">
+                                Utilizamos indicadores de pré e pós avaliação, além de monitoramento de KPIs de negócio atrelados ao programa.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form -->
+            <section id="form-educacao" class="py-20 bg-gradient-to-b from-deep-900 to-black">
+                <div class="max-w-xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-6">Comece sua transformação</h2>
+                    <form class="space-y-4 text-left">
+                        <input type="text" placeholder="Nome Completo" class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
+                        <input type="email" placeholder="E-mail Corporativo" class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
+                        <input type="text" placeholder="Empresa" class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
+                        <select class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-gray-300">
+                            <option>Tamanho da Empresa</option>
+                            <option>1-50</option>
+                            <option>51-200</option>
+                            <option>201+</option>
+                        </select>
+                        <button class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-4 rounded transition">
+                            Solicitar Contato
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: ID SINGULAR (BRANDING) -->
+        <div id="page-id-singular" class="page-section hidden">
+            <!-- Hero -->
+            <section class="py-24 bg-deep-900 text-center">
+                <div class="max-w-4xl mx-auto px-4 fade-in-section">
+                    <span class="text-ocean-300 tracking-widest text-sm font-bold uppercase">Nossa Essência</span>
+                    <h1 class="text-5xl font-bold text-white mt-4 mb-8">Nós Somos a ID Singular</h1>
+                    <p class="text-xl text-gray-300">
+                        Nascemos da inquietação de ver o potencial humano desperdiçado em processos engessados. Somos arquitetos de cultura.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Manifesto Video -->
+            <section class="py-12 bg-deep-800">
+                <div class="max-w-5xl mx-auto px-4">
+                    <div class="aspect-video bg-black rounded-xl border border-white/10 flex items-center justify-center relative group cursor-pointer overflow-hidden shadow-2xl shadow-ocean-900/50">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition">
+                        <div class="relative z-10 bg-white/10 p-4 rounded-full backdrop-blur-sm border border-white/20 group-hover:scale-110 transition">
+                            <i data-lucide="play" class="w-10 h-10 text-white fill-current"></i>
+                        </div>
+                        <div class="absolute bottom-6 left-6 text-white font-bold text-2xl">Nosso Manifesto</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Posicionamento -->
+            <section class="py-20 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 fade-in-section">
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-xl font-bold text-ocean-300 mb-4">Originalidade</h3>
+                        <p class="text-gray-400">Nenhuma solução é replicada. Tudo é construído do zero para a sua realidade.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-xl font-bold text-ocean-300 mb-4">Profundidade</h3>
+                        <p class="text-gray-400">Não ficamos na superfície. Mergulhamos fundo nas causas raízes dos problemas.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-xl font-bold text-ocean-300 mb-4">Resultados</h3>
+                        <p class="text-gray-400">Educação que não gera ponteiro de negócio é apenas entretenimento.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Duplo -->
+            <section class="py-20 bg-deep-800 text-center">
+                <div class="max-w-4xl mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-white mb-8">Faça parte do ecossistema</h2>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <button onclick="showPage('contato')" class="px-8 py-4 bg-ocean-500 text-white rounded font-bold hover:bg-ocean-400 transition">
+                            Contrate a ID Singular
+                        </button>
+                        <button class="px-8 py-4 border border-white text-white rounded font-bold hover:bg-white hover:text-deep-900 transition">
+                            Assine nossa Newsletter
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: CASES -->
+        <div id="page-cases" class="page-section hidden">
+            <section class="py-24 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h1 class="text-4xl font-bold text-white mb-4">Nossos Cases</h1>
+                    <p class="text-gray-400 mb-12 max-w-2xl">Histórias de transformação, desafios superados e resultados alcançados.</p>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="cases-grid">
+                        <!-- Case Item (Repeated via JS usually, hardcoded here for preview) -->
+                        <article class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer" onclick="openCaseModal('Banco Digital X')">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="text-xs text-ocean-300 uppercase font-bold">Fintech</span>
+                                <h3 class="text-xl font-bold text-white mt-2 mb-2">Banco Digital X</h3>
+                                <p class="text-sm text-gray-400">Aceleração de lideranças para IPO.</p>
+                            </div>
+                        </article>
+
+                        <article class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer" onclick="openCaseModal('Varejo Y')">
+                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="text-xs text-ocean-300 uppercase font-bold">Varejo</span>
+                                <h3 class="text-xl font-bold text-white mt-2 mb-2">Varejo Y</h3>
+                                <p class="text-sm text-gray-400">Implementação de Universidade Corporativa.</p>
+                            </div>
+                        </article>
+
+                        <article class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer" onclick="openCaseModal('Indústria Z')">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="text-xs text-ocean-300 uppercase font-bold">Indústria</span>
+                                <h3 class="text-xl font-bold text-white mt-2 mb-2">Indústria Z</h3>
+                                <p class="text-sm text-gray-400">Segurança psicológica no chão de fábrica.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="mt-16 bg-ocean-900/20 p-8 rounded-xl text-center border border-ocean-300/20">
+                        <h3 class="text-2xl font-bold text-white mb-4">Quer ser o próximo case de sucesso?</h3>
+                        <button onclick="showPage('contato')" class="bg-ocean-500 hover:bg-ocean-400 text-white px-8 py-3 rounded-full transition">Falar com Consultor</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: CONTEÚDOS (BLOG) -->
+        <div id="page-conteudos" class="page-section hidden">
+            <section class="py-24 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h1 class="text-4xl font-bold text-white mb-12">Conteúdos & Insights</h1>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="col-span-1 md:col-span-2 relative h-96 rounded-xl overflow-hidden cursor-pointer group">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-deep-900 via-deep-900/50 to-transparent p-8 flex flex-col justify-end">
+                                <span class="text-ocean-300 font-bold mb-2">Destaque</span>
+                                <h2 class="text-3xl font-bold text-white mb-2">O Futuro do Lifelong Learning</h2>
+                                <p class="text-gray-300">Como adaptar sua empresa para a era da aprendizagem contínua.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-deep-800 p-6 rounded-xl border border-white/5 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold text-white mb-4">Assine nossa Newsletter</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Receba curadoria de conteúdo semanalmente.</p>
+                            <input type="email" placeholder="E-mail" class="bg-deep-900 border border-gray-700 rounded p-2 mb-2 text-white">
+                            <button class="bg-ocean-500 text-white py-2 rounded hover:bg-ocean-400 transition">Inscrever-se</button>
+                        </div>
+
+                        <!-- Posts Grid -->
+                        <article class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer">
+                            <span class="text-xs text-gray-500">05 Dez, 2023</span>
+                            <h3 class="text-lg font-bold text-white mt-2 mb-2">Liderança na Era Digital</h3>
+                            <a href="#" class="text-ocean-300 text-sm hover:underline">Ler artigo →</a>
+                        </article>
+                         <article class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer">
+                            <span class="text-xs text-gray-500">01 Dez, 2023</span>
+                            <h3 class="text-lg font-bold text-white mt-2 mb-2">Gamificação funciona?</h3>
+                            <a href="#" class="text-ocean-300 text-sm hover:underline">Ler artigo →</a>
+                        </article>
+                         <article class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer">
+                            <span class="text-xs text-gray-500">28 Nov, 2023</span>
+                            <h3 class="text-lg font-bold text-white mt-2 mb-2">Segurança Psicológica</h3>
+                            <a href="#" class="text-ocean-300 text-sm hover:underline">Ler artigo →</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE: CONTATO -->
+        <div id="page-contato" class="page-section hidden">
+            <section class="py-24 bg-deep-900 min-h-screen flex items-center">
+                <div class="max-w-7xl mx-auto px-4 w-full grid md:grid-cols-2 gap-16">
+                    <div>
+                        <h1 class="text-4xl font-bold text-white mb-6">Vamos Conversar?</h1>
+                        <p class="text-gray-300 mb-8">Estamos prontos para desenhar a próxima etapa da sua empresa.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
+                                    <i data-lucide="mail"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">E-mail</p>
+                                    <p class="text-white">contato@idsingular.com.br</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
+                                    <i data-lucide="phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Telefone</p>
+                                    <p class="text-white">+55 (11) 99999-9999</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Escritório</p>
+                                    <p class="text-white">Av. Paulista, 1000 - São Paulo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-deep-800 p-8 rounded-2xl border border-white/5 shadow-2xl">
+                        <form class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="Nome" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
+                                <input type="text" placeholder="Sobrenome" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
+                            </div>
+                            <input type="email" placeholder="E-mail Corporativo" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
+                            <select class="bg-deep-900 border border-gray-700 rounded p-3 text-gray-300 w-full">
+                                <option>Motivo do Contato</option>
+                                <option>Orçamento Projeto</option>
+                                <option>Parceria</option>
+                                <option>Trabalhe Conosco</option>
+                                <option>Imprensa</option>
+                            </select>
+                            <textarea placeholder="Mensagem" rows="4" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full"></textarea>
+                            <button class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-4 rounded transition">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Modal for Cases (Simple Implementation) -->
+    <div id="case-modal" class="fixed inset-0 z-[60] hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-deep-800 max-w-2xl w-full rounded-2xl p-8 relative border border-white/10">
+            <button onclick="closeCaseModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i data-lucide="x"></i></button>
+            <span class="text-ocean-300 text-sm font-bold uppercase mb-2 block">Case de Sucesso</span>
+            <h2 id="modal-title" class="text-3xl font-bold text-white mb-4">Título do Case</h2>
+            <div class="bg-gray-700 h-48 w-full rounded mb-6 flex items-center justify-center text-gray-500">
+                [Vídeo ou Imagem do Case]
+            </div>
+            <p class="text-gray-300 mb-6">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <div class="grid grid-cols-3 gap-4 mb-6 text-center border-t border-b border-white/10 py-4">
+                <div>
+                    <span class="block text-2xl font-bold text-white">45%</span>
+                    <span class="text-xs text-gray-400">Aumento de Produtividade</span>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold text-white">9.8</span>
+                    <span class="text-xs text-gray-400">NPS</span>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold text-white">3 Meses</span>
+                    <span class="text-xs text-gray-400">Duração</span>
+                </div>
+            </div>
+            <button onclick="closeCaseModal()" class="w-full bg-white text-deep-900 font-bold py-3 rounded hover:bg-gray-200">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-deep-950 border-t border-white/5 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-12 mb-12">
+            <!-- Bloco 1 -->
+            <div>
+                <span class="text-2xl font-bold text-white tracking-wider block mb-6">ID <span class="text-ocean-300">SINGULAR</span></span>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+
+            <!-- Bloco 2 -->
+            <div>
+                <h4 class="text-white font-bold mb-6">Soluções</h4>
+                <ul class="space-y-3 text-gray-400 text-sm">
+                    <li><a href="#" onclick="showPage('educacao')" class="hover:text-ocean-300">Educação Corporativa</a></li>
+                    <li><a href="#" onclick="showPage('cases')" class="hover:text-ocean-300">Cases de Sucesso</a></li>
+                    <li><a href="#" onclick="showPage('conteudos')" class="hover:text-ocean-300">Conteúdo & Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Bloco 3 -->
+            <div>
+                <h4 class="text-white font-bold mb-6">Especialidades</h4>
+                <ul class="space-y-3 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-ocean-300">Assessment Cultural</a></li>
+                    <li><a href="#" class="hover:text-ocean-300">Gestão Humanizada</a></li>
+                    <li><a href="#" class="hover:text-ocean-300">Liderança Ágil</a></li>
+                </ul>
+            </div>
+
+            <!-- Bloco 4 -->
+            <div>
+                <h4 class="text-white font-bold mb-6">Contato & News</h4>
+                <ul class="space-y-3 text-gray-400 text-sm mb-6">
+                    <li class="flex items-center"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> contato@idsingular.com</li>
+                    <li class="flex items-center"><i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> (11) 99999-9999</li>
+                </ul>
+                <div class="flex">
+                    <input type="email" placeholder="E-mail" class="w-full bg-deep-900 border border-gray-700 rounded-l px-3 py-2 text-white text-sm outline-none">
+                    <button class="bg-ocean-500 px-3 py-2 rounded-r text-white hover:bg-ocean-400"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-white/5 text-center text-gray-600 text-sm">
+            &copy; 2023 ID Singular. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Background Decoration Bubbles -->
+    <div id="bubbles-container" class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden"></div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- SPA Navigation Logic ---
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.add('hidden');
+                page.classList.remove('animate-fade-in');
+            });
+
+            // Show selected page
+            const selectedPage = document.getElementById(`page-${pageId}`);
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- Modal Logic ---
+        function openCaseModal(title) {
+            const modal = document.getElementById('case-modal');
+            const modalTitle = document.getElementById('modal-title');
+            modalTitle.innerText = title;
+            modal.classList.remove('hidden');
+        }
+
+        function closeCaseModal() {
+            const modal = document.getElementById('case-modal');
+            modal.classList.add('hidden');
+        }
+
+        // --- Bubbles Background Animation ---
+        function createBubbles() {
+            const container = document.getElementById('bubbles-container');
+            const bubbleCount = 15;
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.top = `${Math.random() * 100 + 100}%`;
+                
+                const duration = Math.random() * 10 + 10;
+                bubble.style.transition = `top ${duration}s linear, opacity ${duration}s ease-in`;
+                bubble.style.opacity = Math.random() * 0.1;
+
+                container.appendChild(bubble);
+
+                // Animate
+                setTimeout(() => {
+                    bubble.style.top = '-100px';
+                }, 100);
+
+                // Reset bubble loop
+                setInterval(() => {
+                    bubble.style.transition = 'none';
+                    bubble.style.top = '110%';
+                    setTimeout(() => {
+                        bubble.style.transition = `top ${duration}s linear`;
+                        bubble.style.top = '-100px';
+                    }, 100);
+                }, duration * 1000);
+            }
+        }
+
+        // --- Intersection Observer for Fade In ---
+        document.addEventListener("DOMContentLoaded", function() {
+            createBubbles();
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('.fade-in-section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+    </script>
+</body>
+</html>
