@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ID Singular - Educação Corporativa</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -90,14 +92,14 @@
             background: rgba(0, 150, 199, 0.1);
             border-radius: 50%;
         }
-        
+
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             will-change: opacity, visibility;
         }
-        
+
         .fade-in-section.is-visible {
             opacity: 1;
             transform: none;
@@ -109,32 +111,106 @@
             overflow: hidden;
             background-color: rgba(255, 255, 255, 0.05);
         }
+
         .ticker {
             display: flex;
             white-space: nowrap;
             animation: ticker 30s linear infinite;
         }
+
         @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Timeline Styles */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-image: linear-gradient(to bottom, #0096c7 50%, transparent 50%);
+            background-size: 2px 20px;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #020B1C;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #1A3B6E;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #0096c7;
         }
+
+        /* Typography for Blog Post */
+        .prose p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .prose h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: white;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prose h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0096c7;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+
+        .prose blockquote {
+            border-left: 4px solid #0096c7;
+            padding-left: 1rem;
+            font-style: italic;
+            color: #e2e8f0;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Header Navigation -->
@@ -142,16 +218,24 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0 cursor-pointer" onclick="showPage('home')">
-                    <span class="text-2xl font-bold text-white tracking-wider">ID <span class="text-ocean-300">SINGULAR</span></span>
+                    <span class="text-2xl font-bold text-white tracking-wider">ID <span
+                            class="text-ocean-300">SINGULAR</span></span>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8 text-sm uppercase tracking-widest">
-                        <a href="#" onclick="showPage('home')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Home</a>
-                        <a href="#" onclick="showPage('educacao')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Educação Corporativa</a>
-                        <a href="#" onclick="showPage('id-singular')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">ID Singular</a>
-                        <a href="#" onclick="showPage('cases')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Cases</a>
-                        <a href="#" onclick="showPage('conteudos')" class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Conteúdos</a>
-                        <button onclick="showPage('contato')" class="bg-ocean-500 hover:bg-ocean-400 text-white px-5 py-2 rounded-full transition duration-300 transform hover:scale-105">Contato</button>
+                        <a href="#" onclick="showPage('home')"
+                            class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Home</a>
+                        <a href="#" onclick="showPage('educacao')"
+                            class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Educação
+                            Corporativa</a>
+                        <a href="#" onclick="showPage('id-singular')"
+                            class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">ID Singular</a>
+                        <a href="#" onclick="showPage('cases')"
+                            class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Cases</a>
+                        <a href="#" onclick="showPage('conteudos')"
+                            class="nav-link text-gray-300 hover:text-white px-3 py-2 transition">Conteúdos</a>
+                        <button onclick="showPage('contato')"
+                            class="bg-ocean-500 hover:bg-ocean-400 text-white px-5 py-2 rounded-full transition duration-300 transform hover:scale-105">Contato</button>
                     </div>
                 </div>
                 <!-- Mobile menu button -->
@@ -165,19 +249,27 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-deep-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" onclick="showPage('home')" class="block px-3 py-2 text-base font-medium text-white hover:bg-deep-700">Home</a>
-                <a href="#" onclick="showPage('educacao')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Educação Corporativa</a>
-                <a href="#" onclick="showPage('id-singular')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">ID Singular</a>
-                <a href="#" onclick="showPage('cases')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Cases</a>
-                <a href="#" onclick="showPage('conteudos')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Conteúdos</a>
-                <a href="#" onclick="showPage('contato')" class="block px-3 py-2 text-base font-medium text-ocean-300 font-bold">Contato</a>
+                <a href="#" onclick="showPage('home')"
+                    class="block px-3 py-2 text-base font-medium text-white hover:bg-deep-700">Home</a>
+                <a href="#" onclick="showPage('educacao')"
+                    class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Educação
+                    Corporativa</a>
+                <a href="#" onclick="showPage('id-singular')"
+                    class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">ID
+                    Singular</a>
+                <a href="#" onclick="showPage('cases')"
+                    class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Cases</a>
+                <a href="#" onclick="showPage('conteudos')"
+                    class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-deep-700">Conteúdos</a>
+                <a href="#" onclick="showPage('contato')"
+                    class="block px-3 py-2 text-base font-medium text-ocean-300 font-bold">Contato</a>
             </div>
         </div>
     </nav>
 
     <!-- Content Container -->
     <main id="main-content" class="pt-20">
-        
+
         <!-- PAGE: HOME -->
         <div id="page-home" class="page-section">
             <!-- Hero -->
@@ -185,51 +277,100 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-deep-900"></div>
                 <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-section">
                     <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                        Transforme sua <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-ocean-300 to-white">Autoridade</span> de Mercado
+                        Transforme sua <br><span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-ocean-300 to-white">Autoridade</span>
+                        de Mercado
                     </h1>
                     <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                         Elevamos a educação corporativa e o branding da sua empresa através da Metodologia Singular.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onclick="showPage('educacao')" class="px-8 py-4 border border-white text-white rounded-full hover:bg-white hover:text-deep-900 transition duration-300">
+                        <button onclick="showPage('educacao')"
+                            class="px-8 py-4 border border-white text-white rounded-full hover:bg-white hover:text-deep-900 transition duration-300">
                             Conheça a Solução
                         </button>
-                        <button onclick="scrollToSection('conversao-home')" class="px-8 py-4 bg-ocean-500 text-white rounded-full hover:bg-ocean-400 transition duration-300 shadow-lg shadow-ocean-500/20">
+                        <button onclick="scrollToSection('conversao-home')"
+                            class="px-8 py-4 bg-ocean-500 text-white rounded-full hover:bg-ocean-400 transition duration-300 shadow-lg shadow-ocean-500/20">
                             Quero levar para minha empresa
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Sobre ID Singular (Resumo) -->
-            <section class="py-20 bg-deep-900 relative overflow-hidden">
-                <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-                    <div class="fade-in-section">
-                        <span class="text-ocean-300 uppercase tracking-widest text-sm font-semibold">Quem Somos</span>
-                        <h2 class="text-4xl font-bold text-white mt-2 mb-6">Educação Corporativa Personalizada e Metodologia Singular</h2>
-                        <p class="text-gray-400 mb-6">
-                            Não entregamos apenas treinamentos, construímos ecossistemas de aprendizagem que reforçam a identidade da sua marca. Nossa metodologia exclusiva mergulha no DNA da sua empresa.
-                        </p>
-                        <button onclick="showPage('educacao')" class="flex items-center text-ocean-300 font-semibold hover:text-white transition">
-                            Saiba mais sobre Educação Corporativa <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-                        </button>
+            <!-- Sobre ID Singular (Diferenciais Competitivos) -->
+            <section class="py-24 bg-deep-900 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-16 fade-in-section">
+                        <span class="text-ocean-300 uppercase tracking-widest text-sm font-semibold">Nossa
+                            Abordagem</span>
+                        <h2 class="text-4xl font-bold text-white mt-2">Diferenciais Competitivos</h2>
                     </div>
-                    <div class="relative fade-in-section">
-                        <!-- Abstract Visual -->
-                        <div class="aspect-square rounded-full bg-gradient-to-tr from-ocean-600/20 to-transparent border border-white/10 relative animate-pulse">
-                            <div class="absolute inset-8 rounded-full border border-ocean-300/30"></div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-lucide="fingerprint" class="w-32 h-32 text-ocean-300/50"></i>
+
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+
+                        <!-- Bloco 1: Jornada Visual -->
+                        <div class="fade-in-section bg-deep-800/50 p-8 rounded-2xl border border-white/5">
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                                <i data-lucide="route" class="mr-3 text-ocean-300"></i> A Jornada Singular
+                            </h3>
+                            <p class="text-gray-400 mb-8">
+                                Um caminho desenhado para conectar o diagnóstico preciso à entrega de resultados,
+                                passando pela co-criação.
+                            </p>
+                            <!-- Visual Ilustrativo Jornada -->
+                            <div class="relative h-64 w-full flex items-center justify-center">
+                                <svg class="w-full h-full text-ocean-500" viewBox="0 0 400 200" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M50 150 C100 150, 100 50, 200 50 C300 50, 300 150, 350 150"
+                                        stroke="currentColor" stroke-width="4" stroke-dasharray="8 8"
+                                        class="animate-pulse" />
+                                    <circle cx="50" cy="150" r="8" fill="#0096c7" />
+                                    <circle cx="200" cy="50" r="8" fill="#0096c7" />
+                                    <circle cx="350" cy="150" r="8" fill="#0096c7" />
+                                </svg>
+                                <div
+                                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg bg-deep-900 px-4 py-2 rounded-full border border-ocean-300">
+                                    Fluxo</div>
                             </div>
                         </div>
+
+                        <!-- Bloco 2: Metodologia Mandala -->
+                        <div class="fade-in-section bg-deep-800/50 p-8 rounded-2xl border border-white/5">
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                                <i data-lucide="aperture" class="mr-3 text-ocean-300"></i> Metodologia Exclusiva
+                            </h3>
+                            <p class="text-gray-400 mb-8">
+                                Nossa mandala integra o indivíduo, a equipe e a organização em um ciclo contínuo de
+                                evolução.
+                            </p>
+                            <!-- Visual Mandala -->
+                            <div class="relative flex justify-center h-64 items-center">
+                                <div
+                                    class="w-48 h-48 rounded-full border border-ocean-300/20 relative animate-[spin_60s_linear_infinite]">
+                                    <div class="absolute inset-2 rounded-full border border-ocean-300/30"></div>
+                                    <div class="absolute inset-8 rounded-full border border-ocean-300/40"></div>
+                                    <div
+                                        class="absolute inset-16 rounded-full bg-ocean-900/50 backdrop-blur-sm flex items-center justify-center">
+                                        <i data-lucide="sun" class="text-white"></i>
+                                    </div>
+                                    <div
+                                        class="absolute top-0 left-1/2 w-2 h-2 bg-ocean-300 rounded-full -translate-x-1/2 -translate-y-1/2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
 
-            <!-- Autoridade & Big Numbers -->
-            <section class="py-20 bg-deep-800">
+            <!-- Cases & Clientes (Unificados) -->
+            <section class="py-20 bg-deep-800 border-y border-white/5">
                 <div class="max-w-7xl mx-auto px-4 text-center">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 fade-in-section">
+
+                    <!-- Big Numbers -->
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 fade-in-section border-b border-white/5 pb-12">
                         <div class="p-6">
                             <div class="text-5xl font-bold text-ocean-300 mb-2">+150</div>
                             <div class="text-gray-400">Projetos Entregues</div>
@@ -243,97 +384,176 @@
                             <div class="text-gray-400">Anos de Mercado</div>
                         </div>
                     </div>
-                    
-                    <!-- Logos Placeholder -->
-                    <div class="flex flex-wrap justify-center gap-12 opacity-60 grayscale hover:grayscale-0 transition duration-500 fade-in-section">
-                        <div class="text-2xl font-bold text-white">EMPRESA A</div>
-                        <div class="text-2xl font-bold text-white">EMPRESA B</div>
-                        <div class="text-2xl font-bold text-white">CORPORATION X</div>
-                        <div class="text-2xl font-bold text-white">GRUPO Y</div>
-                    </div>
 
-                    <div class="mt-16">
-                        <button onclick="scrollToSection('conversao-home')" class="px-8 py-3 bg-white text-deep-900 rounded-full font-bold hover:bg-gray-200 transition">
-                            Falar com um consultor
-                        </button>
+                    <!-- Marcas com Link para Case -->
+                    <div class="fade-in-section">
+                        <h2 class="text-3xl font-bold text-white mb-8">Grandes Marcas, Resultados Singulares</h2>
+                        <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Clique na marca para conhecer a história de
+                            transformação.</p>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <!-- Marca 1 -->
+                            <div onclick="openCaseModal('Nubank - Liderança')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">NUBANK</span>
+                            </div>
+                            <!-- Marca 2 -->
+                            <div onclick="openCaseModal('Google - Onboarding')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">GOOGLE</span>
+                            </div>
+                            <!-- Marca 3 -->
+                            <div onclick="openCaseModal('Amazon - Logística')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">AMAZON</span>
+                            </div>
+                            <!-- Marca 4 -->
+                            <div onclick="openCaseModal('Itaú - Cultura')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">ITAÚ</span>
+                            </div>
+                            <!-- Marca 5 -->
+                            <div onclick="openCaseModal('Spotify - Agile')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">SPOTIFY</span>
+                            </div>
+                            <!-- Marca 6 -->
+                            <div onclick="openCaseModal('Salesforce - Vendas')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">SALESFORCE</span>
+                            </div>
+                            <!-- Marca 7 -->
+                            <div onclick="openCaseModal('Vale - Segurança')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">VALE</span>
+                            </div>
+                            <!-- Marca 8 -->
+                            <div onclick="openCaseModal('Ambev - Trainee')"
+                                class="group bg-deep-900 p-8 rounded-xl border border-white/5 hover:border-ocean-300 cursor-pointer transition flex items-center justify-center h-32">
+                                <span
+                                    class="text-xl font-bold text-gray-500 group-hover:text-white transition">AMBEV</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <button onclick="showPage('cases')"
+                                class="px-8 py-3 border border-ocean-300 text-ocean-300 rounded-full font-bold hover:bg-ocean-300 hover:text-deep-900 transition">
+                                Ver todos os cases
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Cases Preview -->
+            <!-- Conteúdo/Blog (Card Layout) -->
             <section class="py-20 bg-deep-900">
                 <div class="max-w-7xl mx-auto px-4">
                     <div class="flex justify-between items-end mb-12 fade-in-section">
                         <div>
-                            <span class="text-ocean-300 uppercase tracking-widest text-sm">Portfólio</span>
-                            <h2 class="text-3xl font-bold text-white mt-2">Transformações Reais</h2>
+                            <span class="text-ocean-300 uppercase tracking-widest text-sm">Conteúdo</span>
+                            <h2 class="text-3xl font-bold text-white mt-2">Insights ID Singular</h2>
                         </div>
-                        <button onclick="showPage('cases')" class="hidden md:block text-white hover:text-ocean-300 transition">Ver todos os cases</button>
+                        <button onclick="showPage('conteudos')"
+                            class="hidden md:block text-white hover:text-ocean-300 transition">Ver blog
+                            completo</button>
                     </div>
-                    
+
                     <div class="grid md:grid-cols-3 gap-8 fade-in-section">
-                        <!-- Case Card 1 -->
-                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group" onclick="showPage('cases')">
+                        <!-- Post 1 -->
+                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group"
+                            onclick="openBlogPost('Lifelong Learning')">
                             <div class="h-48 bg-gray-700 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Case" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80"
+                                    alt="Blog"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-white mb-2">Reestruturação Tech</h3>
-                                <p class="text-sm text-gray-400">Desenvolvimento de lideranças ágeis para unicórnio brasileiro.</p>
+                                <span class="text-xs text-ocean-300 font-bold uppercase mb-2 block">Tendências</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Lifelong Learning</h3>
+                                <p class="text-sm text-gray-400 mb-4">O impacto da aprendizagem contínua na retenção de
+                                    talentos.</p>
+                                <button class="text-ocean-300 text-sm hover:underline font-semibold">Ler artigo
+                                    →</button>
                             </div>
                         </div>
-                        <!-- Case Card 2 -->
-                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group" onclick="showPage('cases')">
+                        <!-- Post 2 -->
+                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group"
+                            onclick="openBlogPost('Segurança Psicológica')">
                             <div class="h-48 bg-gray-700 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Case" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+                                    alt="Blog"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-white mb-2">Cultura de Inovação</h3>
-                                <p class="text-sm text-gray-400">Programa de onboarding gamificado para setor financeiro.</p>
+                                <span class="text-xs text-ocean-300 font-bold uppercase mb-2 block">Cultura</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Segurança Psicológica</h3>
+                                <p class="text-sm text-gray-400 mb-4">Como criar ambientes seguros para inovação.</p>
+                                <button class="text-ocean-300 text-sm hover:underline font-semibold">Ler artigo
+                                    →</button>
                             </div>
                         </div>
-                         <!-- Case Card 3 -->
-                         <div class="glass-card rounded-xl overflow-hidden cursor-pointer group" onclick="showPage('cases')">
+                        <!-- Post 3 -->
+                        <div class="glass-card rounded-xl overflow-hidden cursor-pointer group"
+                            onclick="openBlogPost('Liderança 4.0')">
                             <div class="h-48 bg-gray-700 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Case" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80"
+                                    alt="Blog"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-white mb-2">Varejo 4.0</h3>
-                                <p class="text-sm text-gray-400">Treinamento de ponta a ponta para rede de franquias.</p>
+                                <span class="text-xs text-ocean-300 font-bold uppercase mb-2 block">Liderança</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Liderança 4.0</h3>
+                                <p class="text-sm text-gray-400 mb-4">As soft skills necessárias para o gestor do
+                                    futuro.</p>
+                                <button class="text-ocean-300 text-sm hover:underline font-semibold">Ler artigo
+                                    →</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-8 text-center md:hidden">
-                        <button onclick="showPage('cases')" class="text-white hover:text-ocean-300 transition">Ver todos os cases</button>
                     </div>
                 </div>
             </section>
 
-             <!-- Fechamento / Conversão -->
-             <section id="conversao-home" class="py-20 bg-gradient-to-r from-deep-800 to-ocean-900 border-t border-white/5">
+            <!-- Fechamento / Conversão -->
+            <section id="conversao-home"
+                class="py-20 bg-gradient-to-r from-deep-800 to-ocean-900 border-t border-white/5">
                 <div class="max-w-4xl mx-auto px-4 text-center fade-in-section">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para mergulhar no futuro da sua empresa?</h2>
-                    <p class="text-gray-300 mb-8">Solicite um diagnóstico gratuito e descubra como a ID Singular pode transformar seus resultados.</p>
-                    
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para mergulhar no futuro da sua
+                        empresa?</h2>
+                    <p class="text-gray-300 mb-8">Solicite um diagnóstico gratuito e descubra como a ID Singular pode
+                        transformar seus resultados.</p>
+
                     <form class="max-w-md mx-auto space-y-4 text-left bg-white/5 p-6 rounded-xl backdrop-blur-sm">
                         <div>
                             <label class="block text-xs uppercase text-gray-400 mb-1">Nome</label>
-                            <input type="text" class="w-full bg-deep-900 border border-gray-700 rounded p-2 text-white focus:border-ocean-300 outline-none">
+                            <input type="text"
+                                class="w-full bg-deep-900 border border-gray-700 rounded p-2 text-white focus:border-ocean-300 outline-none">
                         </div>
                         <div>
                             <label class="block text-xs uppercase text-gray-400 mb-1">E-mail Corporativo</label>
-                            <input type="email" class="w-full bg-deep-900 border border-gray-700 rounded p-2 text-white focus:border-ocean-300 outline-none">
+                            <input type="email"
+                                class="w-full bg-deep-900 border border-gray-700 rounded p-2 text-white focus:border-ocean-300 outline-none">
                         </div>
-                        <button type="submit" class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-3 rounded transition mt-4">
+                        <button type="submit"
+                            class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-3 rounded transition mt-4">
                             Enviar Solicitação
                         </button>
                     </form>
 
                     <div class="mt-12 pt-8 border-t border-white/10">
-                        <p class="text-sm text-gray-400 mb-4">Ou assine nossa newsletter para receber insights exclusivos</p>
+                        <p class="text-sm text-gray-400 mb-4">Ou assine nossa newsletter para receber insights
+                            exclusivos</p>
                         <div class="flex max-w-sm mx-auto">
-                            <input type="email" placeholder="Seu melhor e-mail" class="flex-1 bg-transparent border border-gray-600 rounded-l px-4 py-2 text-white outline-none">
-                            <button class="bg-white text-deep-900 px-6 py-2 rounded-r font-bold hover:bg-gray-200">Assinar</button>
+                            <input type="email" placeholder="Seu melhor e-mail"
+                                class="flex-1 bg-transparent border border-gray-600 rounded-l px-4 py-2 text-white outline-none">
+                            <button
+                                class="bg-white text-deep-900 px-6 py-2 rounded-r font-bold hover:bg-gray-200">Assinar</button>
                         </div>
                     </div>
                 </div>
@@ -342,25 +562,23 @@
 
         <!-- PAGE: EDUCAÇÃO CORPORATIVA -->
         <div id="page-educacao" class="page-section hidden">
-            <!-- Hero LP -->
-            <section class="py-24 bg-deep-800 relative">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-                <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
-                    <div class="fade-in-section">
-                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Desenvolva Talentos, <br>Impulsione <span class="text-ocean-300">Resultados</span></h1>
-                        <p class="text-lg text-gray-300 mb-8">Soluções de aprendizagem desenhadas sob medida para os desafios estratégicos do seu negócio.</p>
-                        <button onclick="scrollToSection('form-educacao')" class="px-8 py-3 bg-ocean-500 text-white rounded-full font-bold hover:bg-ocean-400 transition shadow-lg shadow-ocean-500/30">
-                            Falar com especialista
-                        </button>
-                    </div>
-                    <div class="fade-in-section">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" class="rounded-2xl shadow-2xl border border-white/10 transform rotate-2 hover:rotate-0 transition duration-500" alt="Team">
-                    </div>
+            <!-- Hero LP (Centralizado) -->
+            <section class="py-24 relative bg-deep-900">
+                <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center opacity-40"></div>
+                <div class="max-w-5xl mx-auto px-4 text-center relative z-10 fade-in-section">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Desenvolva Talentos, <br>Impulsione <span
+                            class="text-ocean-300">Resultados</span></h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Soluções de aprendizagem desenhadas sob
+                        medida para os desafios estratégicos do seu negócio. Do diagnóstico à mensuração de ROI.</p>
+                    <button onclick="scrollToSection('form-educacao')"
+                        class="px-8 py-4 bg-ocean-500 text-white rounded-full font-bold hover:bg-ocean-400 transition shadow-lg shadow-ocean-500/30">
+                        Falar com especialista
+                    </button>
                 </div>
             </section>
 
             <!-- Ticker Marcas -->
-            <div class="ticker-wrap py-4 border-y border-white/5">
+            <div class="ticker-wrap py-4 border-y border-white/5 bg-deep-800">
                 <div class="ticker text-gray-500 font-bold text-xl uppercase tracking-widest">
                     <span class="mx-8">Google</span>
                     <span class="mx-8">Amazon</span>
@@ -376,113 +594,308 @@
                 </div>
             </div>
 
-            <!-- Jornada Singular -->
-            <section class="py-20 bg-deep-900">
-                <div class="max-w-7xl mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold text-white mb-12 fade-in-section">A Jornada Singular</h2>
-                    <div class="grid md:grid-cols-4 gap-4 fade-in-section">
-                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
-                            <div class="text-ocean-300 text-4xl mb-4 font-bold">01</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Diagnóstico</h3>
-                            <p class="text-sm text-gray-400">Imersão profunda na cultura e dores.</p>
+            <!-- Jornada Singular (Vertical Timeline Version) -->
+            <section class="py-24 bg-deep-900 overflow-hidden relative">
+                <div class="max-w-5xl mx-auto px-4 relative">
+                    <h2 class="text-3xl font-bold text-white mb-16 text-center fade-in-section">Nossa Metodologia em 5
+                        Etapas</h2>
+
+                    <div class="relative">
+                        <!-- Linha Central Vertical -->
+                        <div class="timeline-line"></div>
+
+                        <!-- Step 1 (Esquerda) -->
+                        <div class="mb-12 flex justify-between items-center w-full right-timeline fade-in-section">
+                            <div class="order-1 w-5/12">
+                                <div class="glass-card p-6 rounded-xl relative shadow-lg">
+                                    <h3 class="mb-3 font-bold text-white text-xl">Diagnóstico</h3>
+                                    <p class="text-sm text-gray-400">Análise profunda do contexto organizacional,
+                                        cultura empresarial e necessidades específicas. Mapeamento de objetivos
+                                        estratégicos.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="z-20 flex items-center order-1 bg-ocean-500 shadow-xl w-10 h-10 rounded-full justify-center text-white border-4 border-deep-900">
+                                <span class="font-bold text-sm">01</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
                         </div>
-                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
-                            <div class="text-ocean-300 text-4xl mb-4 font-bold">02</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Design</h3>
-                            <p class="text-sm text-gray-400">Co-criação da trilha de aprendizagem.</p>
+
+                        <!-- Step 2 (Direita) -->
+                        <div
+                            class="mb-12 flex justify-between flex-row-reverse items-center w-full left-timeline fade-in-section">
+                            <div class="order-1 w-5/12">
+                                <div class="glass-card p-6 rounded-xl relative shadow-lg text-right">
+                                    <h3 class="mb-3 font-bold text-white text-xl">Aplicação</h3>
+                                    <p class="text-sm text-gray-400">Implementação dos instrumentos de assessment
+                                        personalizados. Utilização de ferramentas validadas cientificamente adaptadas ao
+                                        contexto.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="z-20 flex items-center order-1 bg-ocean-500 shadow-xl w-10 h-10 rounded-full justify-center text-white border-4 border-deep-900">
+                                <span class="font-bold text-sm">02</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
                         </div>
-                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
-                            <div class="text-ocean-300 text-4xl mb-4 font-bold">03</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Entrega</h3>
-                            <p class="text-sm text-gray-400">Workshops, EAD e Gamificação.</p>
+
+                        <!-- Step 3 (Esquerda) -->
+                        <div class="mb-12 flex justify-between items-center w-full right-timeline fade-in-section">
+                            <div class="order-1 w-5/12">
+                                <div class="glass-card p-6 rounded-xl relative shadow-lg">
+                                    <h3 class="mb-3 font-bold text-white text-xl">Análise</h3>
+                                    <p class="text-sm text-gray-400">Processamento detalhado de dados com metodologias
+                                        estatísticas avançadas. Identificação de padrões e gaps de competências.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="z-20 flex items-center order-1 bg-ocean-500 shadow-xl w-10 h-10 rounded-full justify-center text-white border-4 border-deep-900">
+                                <span class="font-bold text-sm">03</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
                         </div>
-                        <div class="p-6 border border-white/10 rounded-lg hover:bg-white/5 transition">
-                            <div class="text-ocean-300 text-4xl mb-4 font-bold">04</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Sustentação</h3>
-                            <p class="text-sm text-gray-400">Mensuração de ROI e acompanhamento.</p>
+
+                        <!-- Step 4 (Direita) -->
+                        <div
+                            class="mb-12 flex justify-between flex-row-reverse items-center w-full left-timeline fade-in-section">
+                            <div class="order-1 w-5/12">
+                                <div class="glass-card p-6 rounded-xl relative shadow-lg text-right">
+                                    <h3 class="mb-3 font-bold text-white text-xl">Entrega</h3>
+                                    <p class="text-sm text-gray-400">Apresentação de relatórios completos com insights
+                                        acionáveis. Dashboards interativos e recomendações estratégicas personalizadas.
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="z-20 flex items-center order-1 bg-ocean-500 shadow-xl w-10 h-10 rounded-full justify-center text-white border-4 border-deep-900">
+                                <span class="font-bold text-sm">04</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 5 (Esquerda) -->
+                        <div class="mb-12 flex justify-between items-center w-full right-timeline fade-in-section">
+                            <div class="order-1 w-5/12">
+                                <div class="glass-card p-6 rounded-xl relative shadow-lg">
+                                    <h3 class="mb-3 font-bold text-white text-xl">Acompanhamento</h3>
+                                    <p class="text-sm text-gray-400">Suporte contínuo para implementação de melhorias.
+                                        Monitoramento de evolução, ajustes de rota e garantia de ROI.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="z-20 flex items-center order-1 bg-ocean-500 shadow-xl w-10 h-10 rounded-full justify-center text-white border-4 border-deep-900">
+                                <span class="font-bold text-sm">05</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-12">
+                        <button
+                            class="px-8 py-3 border border-white text-white rounded-full hover:bg-white hover:text-deep-900 transition">
+                            Agendar Apresentação da Metodologia
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exemplos de Programas (Nova Seção) -->
+            <section class="py-20 bg-deep-800">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-white mb-12 text-center fade-in-section">O que entregamos</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-in-section">
+                        <div
+                            class="p-6 bg-deep-900 rounded-xl border border-white/5 hover:border-ocean-300/50 text-center">
+                            <i data-lucide="users" class="w-10 h-10 text-ocean-300 mx-auto mb-4"></i>
+                            <h3 class="font-bold text-white">Liderança Ágil</h3>
+                        </div>
+                        <div
+                            class="p-6 bg-deep-900 rounded-xl border border-white/5 hover:border-ocean-300/50 text-center">
+                            <i data-lucide="target" class="w-10 h-10 text-ocean-300 mx-auto mb-4"></i>
+                            <h3 class="font-bold text-white">Vendas Consultivas</h3>
+                        </div>
+                        <div
+                            class="p-6 bg-deep-900 rounded-xl border border-white/5 hover:border-ocean-300/50 text-center">
+                            <i data-lucide="heart-handshake" class="w-10 h-10 text-ocean-300 mx-auto mb-4"></i>
+                            <h3 class="font-bold text-white">Cultura & ESG</h3>
+                        </div>
+                        <div
+                            class="p-6 bg-deep-900 rounded-xl border border-white/5 hover:border-ocean-300/50 text-center">
+                            <i data-lucide="rocket" class="w-10 h-10 text-ocean-300 mx-auto mb-4"></i>
+                            <h3 class="font-bold text-white">Inovação</h3>
                         </div>
                     </div>
-                    <button class="mt-12 px-8 py-3 border border-ocean-300 text-ocean-300 rounded-full hover:bg-ocean-300 hover:text-deep-900 transition">
-                        Conheça os detalhes
-                    </button>
                 </div>
             </section>
 
             <!-- Metodologia (Mandala) -->
-            <section class="py-24 bg-deep-800 overflow-hidden relative">
+            <section class="py-24 bg-deep-900 overflow-hidden relative">
                 <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
                     <div class="order-2 md:order-1 relative flex justify-center fade-in-section">
                         <!-- Abstract Mandala CSS -->
-                        <div class="w-80 h-80 rounded-full border border-ocean-300/20 relative animate-[spin_60s_linear_infinite]">
+                        <div
+                            class="w-80 h-80 rounded-full border border-ocean-300/20 relative animate-[spin_60s_linear_infinite]">
                             <div class="absolute inset-4 rounded-full border border-ocean-300/30"></div>
                             <div class="absolute inset-8 rounded-full border border-ocean-300/40"></div>
-                            <div class="absolute inset-16 rounded-full bg-ocean-900/50 backdrop-blur-sm flex items-center justify-center">
+                            <div
+                                class="absolute inset-16 rounded-full bg-ocean-900/50 backdrop-blur-sm flex items-center justify-center">
                                 <span class="text-white font-bold tracking-widest">METODOLOGIA</span>
                             </div>
-                            <!-- Orbiting dots -->
-                            <div class="absolute top-0 left-1/2 w-3 h-3 bg-ocean-300 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-                            <div class="absolute bottom-0 left-1/2 w-3 h-3 bg-white rounded-full -translate-x-1/2 translate-y-1/2"></div>
+                            <div
+                                class="absolute top-0 left-1/2 w-3 h-3 bg-ocean-300 rounded-full -translate-x-1/2 -translate-y-1/2">
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-1/2 w-3 h-3 bg-white rounded-full -translate-x-1/2 translate-y-1/2">
+                            </div>
                         </div>
                     </div>
                     <div class="order-1 md:order-2 fade-in-section">
-                        <span class="text-ocean-300 uppercase tracking-widest text-sm font-semibold">O Coração da ID</span>
+                        <span class="text-ocean-300 uppercase tracking-widest text-sm font-semibold">O Coração da
+                            ID</span>
                         <h2 class="text-4xl font-bold text-white mt-2 mb-6">Metodologia Mandala</h2>
                         <p class="text-gray-400 mb-6">
-                            Nossa abordagem é cíclica e expansiva. Integramos o indivíduo (centro), a equipe (camada média) e a organização (camada externa), garantindo que o aprendizado flua em todas as direções.
+                            Nossa abordagem é cíclica e expansiva. Integramos o indivíduo (centro), a equipe (camada
+                            média) e a organização (camada externa), garantindo que o aprendizado flua em todas as
+                            direções.
                         </p>
                         <ul class="space-y-3 text-gray-300">
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-300 mr-3"></i> Foco no Humano</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-300 mr-3"></i> Aprendizagem Ativa</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-300 mr-3"></i> Dados & Analytics</li>
+                            <li class="flex items-center"><i data-lucide="check-circle"
+                                    class="w-5 h-5 text-ocean-300 mr-3"></i> Foco no Humano</li>
+                            <li class="flex items-center"><i data-lucide="check-circle"
+                                    class="w-5 h-5 text-ocean-300 mr-3"></i> Aprendizagem Ativa</li>
+                            <li class="flex items-center"><i data-lucide="check-circle"
+                                    class="w-5 h-5 text-ocean-300 mr-3"></i> Dados & Analytics</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Arautos Section -->
-            <section class="py-20 bg-deep-900 relative">
-                <div class="max-w-7xl mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold text-white mb-4 fade-in-section">Os Arautos da Mudança</h2>
-                    <p class="text-gray-400 mb-12 max-w-2xl mx-auto fade-in-section">Formamos multiplicadores internos que carregam a tocha do conhecimento e garantem a perenidade da cultura de aprendizagem.</p>
-                    
+            <!-- Arautos (Generalista com Mosaico) -->
+            <section class="py-32 relative overflow-hidden bg-deep-800">
+                <!-- Mosaic Background (CSS only approximation for single file) -->
+                <div class="absolute inset-0 opacity-10 grid grid-cols-6 grid-rows-3 gap-1">
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80')] bg-cover">
+                    </div>
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80')] bg-cover col-span-2">
+                    </div>
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80')] bg-cover">
+                    </div>
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80')] bg-cover col-span-2">
+                    </div>
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')] bg-cover col-span-2">
+                    </div>
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80')] bg-cover">
+                    </div>
+                    <div
+                        class="bg-gray-500 bg-[url('https://images.unsplash.com/photo-1554151228-14d9def656ec?w=400&q=80')] bg-cover col-span-3">
+                    </div>
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-deep-900 via-deep-900/90 to-deep-800/80"></div>
+
+                <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                    <h2 class="text-4xl font-bold text-white mb-6 fade-in-section">Os Arautos da Mudança</h2>
+                    <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto fade-in-section">
+                        Para que a cultura de aprendizagem permaneça, formamos multiplicadores internos. Pessoas reais,
+                        da sua equipe, que se tornam embaixadores do conhecimento e garantem a continuidade do projeto.
+                    </p>
+                    <div class="flex justify-center gap-4 fade-in-section">
+                        <span
+                            class="px-4 py-2 bg-white/10 rounded-full text-sm text-ocean-300 border border-ocean-300/30">Mentores
+                            Internos</span>
+                        <span
+                            class="px-4 py-2 bg-white/10 rounded-full text-sm text-ocean-300 border border-ocean-300/30">Facilitadores</span>
+                        <span
+                            class="px-4 py-2 bg-white/10 rounded-full text-sm text-ocean-300 border border-ocean-300/30">Líderes
+                            Educadores</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Diferenciais (Blocos Complementares) -->
+            <section class="py-20 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4">
                     <div class="grid md:grid-cols-3 gap-8 fade-in-section">
-                        <div class="bg-deep-800 p-8 rounded-xl border-t-4 border-ocean-500">
-                            <i data-lucide="mic-2" class="w-10 h-10 text-white mb-4"></i>
-                            <h3 class="text-lg font-bold text-white">Comunicadores</h3>
+                        <div class="flex items-start">
+                            <div
+                                class="w-12 h-12 bg-deep-800 rounded-lg flex items-center justify-center text-ocean-300 mr-4 shrink-0 border border-white/10">
+                                <i data-lucide="settings"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-2">Customização Real</h3>
+                                <p class="text-sm text-gray-400">Conteúdo adaptado à linguagem e realidade do seu setor.
+                                </p>
+                            </div>
                         </div>
-                        <div class="bg-deep-800 p-8 rounded-xl border-t-4 border-ocean-400">
-                            <i data-lucide="compass" class="w-10 h-10 text-white mb-4"></i>
-                            <h3 class="text-lg font-bold text-white">Facilitadores</h3>
+                        <div class="flex items-start">
+                            <div
+                                class="w-12 h-12 bg-deep-800 rounded-lg flex items-center justify-center text-ocean-300 mr-4 shrink-0 border border-white/10">
+                                <i data-lucide="bar-chart-2"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-2">Data Driven</h3>
+                                <p class="text-sm text-gray-400">Relatórios de engajamento e performance em tempo real.
+                                </p>
+                            </div>
                         </div>
-                        <div class="bg-deep-800 p-8 rounded-xl border-t-4 border-ocean-300">
-                            <i data-lucide="award" class="w-10 h-10 text-white mb-4"></i>
-                            <h3 class="text-lg font-bold text-white">Mentores</h3>
+                        <div class="flex items-start">
+                            <div
+                                class="w-12 h-12 bg-deep-800 rounded-lg flex items-center justify-center text-ocean-300 mr-4 shrink-0 border border-white/10">
+                                <i data-lucide="smartphone"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-2">Multiplataforma</h3>
+                                <p class="text-sm text-gray-400">Acesso via mobile, desktop ou integração com seu LMS.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <!-- Cases (Replicado da Home) -->
+            <section class="py-20 bg-deep-800 border-t border-white/5">
+                <div class="max-w-7xl mx-auto px-4 text-center fade-in-section">
+                    <h2 class="text-3xl font-bold text-white mb-8">Quem já confia</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 opacity-80">
+                        <div class="p-6 bg-deep-900 border border-white/5 rounded-lg text-white font-bold">NUBANK</div>
+                        <div class="p-6 bg-deep-900 border border-white/5 rounded-lg text-white font-bold">GOOGLE</div>
+                        <div class="p-6 bg-deep-900 border border-white/5 rounded-lg text-white font-bold">AMAZON</div>
+                        <div class="p-6 bg-deep-900 border border-white/5 rounded-lg text-white font-bold">VALE</div>
+                    </div>
+                </div>
+            </section>
+
             <!-- FAQ -->
-            <section class="py-20 bg-deep-800">
+            <section class="py-20 bg-deep-900">
                 <div class="max-w-3xl mx-auto px-4 fade-in-section">
                     <h2 class="text-3xl font-bold text-white mb-8 text-center">Dúvidas Frequentes</h2>
                     <div class="space-y-4">
-                        <details class="group bg-deep-900 rounded-lg p-4 cursor-pointer">
+                        <details class="group bg-deep-800 rounded-lg p-4 cursor-pointer border border-white/5">
                             <summary class="flex justify-between items-center font-medium text-white list-none">
                                 <span>Os treinamentos são presenciais ou online?</span>
                                 <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
                             </summary>
                             <p class="text-gray-400 mt-4 text-sm group-open:animate-fadeIn">
-                                Atuamos no modelo híbrido, presencial e 100% online, dependendo da necessidade e distribuição geográfica do seu time.
+                                Atuamos no modelo híbrido, presencial e 100% online, dependendo da necessidade e
+                                distribuição geográfica do seu time.
                             </p>
                         </details>
-                        <details class="group bg-deep-900 rounded-lg p-4 cursor-pointer">
+                        <details class="group bg-deep-800 rounded-lg p-4 cursor-pointer border border-white/5">
                             <summary class="flex justify-between items-center font-medium text-white list-none">
                                 <span>Como medimos o ROI do treinamento?</span>
                                 <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
                             </summary>
                             <p class="text-gray-400 mt-4 text-sm group-open:animate-fadeIn">
-                                Utilizamos indicadores de pré e pós avaliação, além de monitoramento de KPIs de negócio atrelados ao programa.
+                                Utilizamos indicadores de pré e pós avaliação, além de monitoramento de KPIs de negócio
+                                atrelados ao programa.
                             </p>
                         </details>
                     </div>
@@ -494,16 +907,20 @@
                 <div class="max-w-xl mx-auto px-4 text-center">
                     <h2 class="text-3xl font-bold text-white mb-6">Comece sua transformação</h2>
                     <form class="space-y-4 text-left">
-                        <input type="text" placeholder="Nome Completo" class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
-                        <input type="email" placeholder="E-mail Corporativo" class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
-                        <input type="text" placeholder="Empresa" class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
+                        <input type="text" placeholder="Nome Completo"
+                            class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
+                        <input type="email" placeholder="E-mail Corporativo"
+                            class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
+                        <input type="text" placeholder="Empresa"
+                            class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-white">
                         <select class="w-full bg-deep-800 border border-gray-700 rounded p-3 text-gray-300">
                             <option>Tamanho da Empresa</option>
                             <option>1-50</option>
                             <option>51-200</option>
                             <option>201+</option>
                         </select>
-                        <button class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-4 rounded transition">
+                        <button
+                            class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-4 rounded transition">
                             Solicitar Contato
                         </button>
                     </form>
@@ -519,7 +936,8 @@
                     <span class="text-ocean-300 tracking-widest text-sm font-bold uppercase">Nossa Essência</span>
                     <h1 class="text-5xl font-bold text-white mt-4 mb-8">Nós Somos a ID Singular</h1>
                     <p class="text-xl text-gray-300">
-                        Nascemos da inquietação de ver o potencial humano desperdiçado em processos engessados. Somos arquitetos de cultura.
+                        Nascemos da inquietação de ver o potencial humano desperdiçado em processos engessados. Somos
+                        arquitetos de cultura.
                     </p>
                 </div>
             </section>
@@ -527,9 +945,12 @@
             <!-- Manifesto Video -->
             <section class="py-12 bg-deep-800">
                 <div class="max-w-5xl mx-auto px-4">
-                    <div class="aspect-video bg-black rounded-xl border border-white/10 flex items-center justify-center relative group cursor-pointer overflow-hidden shadow-2xl shadow-ocean-900/50">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition">
-                        <div class="relative z-10 bg-white/10 p-4 rounded-full backdrop-blur-sm border border-white/20 group-hover:scale-110 transition">
+                    <div
+                        class="aspect-video bg-black rounded-xl border border-white/10 flex items-center justify-center relative group cursor-pointer overflow-hidden shadow-2xl shadow-ocean-900/50">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80"
+                            class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition">
+                        <div
+                            class="relative z-10 bg-white/10 p-4 rounded-full backdrop-blur-sm border border-white/20 group-hover:scale-110 transition">
                             <i data-lucide="play" class="w-10 h-10 text-white fill-current"></i>
                         </div>
                         <div class="absolute bottom-6 left-6 text-white font-bold text-2xl">Nosso Manifesto</div>
@@ -537,16 +958,99 @@
                 </div>
             </section>
 
-            <!-- Posicionamento -->
+            <!-- Nossa Solução (Added) -->
             <section class="py-20 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-12">Nossa Solução</h2>
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="text-left">
+                            <h3 class="text-2xl font-bold text-ocean-300 mb-4">Educação que Constrói Marca</h3>
+                            <p class="text-gray-400 mb-6">
+                                Acreditamos que a marca de uma empresa não é o que ela diz que é, mas sim o que seus
+                                colaboradores vivem no dia a dia. Nossa solução alinha o Branding com o T&D.
+                            </p>
+                        </div>
+                        <div class="bg-deep-800 p-8 rounded-xl border border-white/5 relative">
+                            <!-- Micro Jornada Illustration -->
+                            <div class="flex justify-between items-center text-white">
+                                <div class="text-center">
+                                    <div
+                                        class="w-10 h-10 bg-ocean-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                        1</div>
+                                    <span class="text-xs">Cultura</span>
+                                </div>
+                                <div class="h-0.5 bg-gray-600 w-full mx-2"></div>
+                                <div class="text-center">
+                                    <div
+                                        class="w-10 h-10 bg-ocean-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                        2</div>
+                                    <span class="text-xs">Pessoas</span>
+                                </div>
+                                <div class="h-0.5 bg-gray-600 w-full mx-2"></div>
+                                <div class="text-center">
+                                    <div
+                                        class="w-10 h-10 bg-ocean-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                        3</div>
+                                    <span class="text-xs">Marca</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Metodologia (Added) -->
+            <section class="py-20 bg-deep-800">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-8">Metodologia Singular</h2>
+                    <!-- Reusing Mandala Visual Logic simplified -->
+                    <div
+                        class="w-48 h-48 mx-auto rounded-full border border-ocean-300/20 relative animate-[spin_60s_linear_infinite] mb-8">
+                        <div class="absolute inset-2 rounded-full border border-ocean-300/30"></div>
+                        <div class="absolute inset-8 rounded-full border border-ocean-300/40"></div>
+                        <div class="absolute inset-16 rounded-full bg-ocean-900/50 flex items-center justify-center">
+                            <i data-lucide="sun" class="text-ocean-300"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Centrada no ser humano, expandida para o negócio.</p>
+                </div>
+            </section>
+
+            <!-- Big Numbers & Clients (Added) -->
+            <section class="py-20 bg-deep-900">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <div class="p-6">
+                            <div class="text-5xl font-bold text-ocean-300 mb-2">+150</div>
+                            <div class="text-gray-400">Projetos</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-5xl font-bold text-ocean-300 mb-2">50k</div>
+                            <div class="text-gray-400">Pessoas</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-5xl font-bold text-ocean-300 mb-2">12</div>
+                            <div class="text-gray-400">Anos</div>
+                        </div>
+                    </div>
+                    <div class="opacity-50 flex flex-wrap justify-center gap-8 font-bold text-white">
+                        <span>GOOGLE</span> <span>AMAZON</span> <span>MICROSOFT</span> <span>ITAU</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Posicionamento -->
+            <section class="py-20 bg-deep-800">
                 <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 fade-in-section">
                     <div class="glass-card p-8 rounded-xl">
                         <h3 class="text-xl font-bold text-ocean-300 mb-4">Originalidade</h3>
-                        <p class="text-gray-400">Nenhuma solução é replicada. Tudo é construído do zero para a sua realidade.</p>
+                        <p class="text-gray-400">Nenhuma solução é replicada. Tudo é construído do zero para a sua
+                            realidade.</p>
                     </div>
                     <div class="glass-card p-8 rounded-xl">
                         <h3 class="text-xl font-bold text-ocean-300 mb-4">Profundidade</h3>
-                        <p class="text-gray-400">Não ficamos na superfície. Mergulhamos fundo nas causas raízes dos problemas.</p>
+                        <p class="text-gray-400">Não ficamos na superfície. Mergulhamos fundo nas causas raízes dos
+                            problemas.</p>
                     </div>
                     <div class="glass-card p-8 rounded-xl">
                         <h3 class="text-xl font-bold text-ocean-300 mb-4">Resultados</h3>
@@ -556,14 +1060,16 @@
             </section>
 
             <!-- CTA Duplo -->
-            <section class="py-20 bg-deep-800 text-center">
+            <section class="py-20 bg-deep-900 text-center border-t border-white/5">
                 <div class="max-w-4xl mx-auto px-4">
                     <h2 class="text-3xl font-bold text-white mb-8">Faça parte do ecossistema</h2>
                     <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                        <button onclick="showPage('contato')" class="px-8 py-4 bg-ocean-500 text-white rounded font-bold hover:bg-ocean-400 transition">
+                        <button onclick="showPage('contato')"
+                            class="px-8 py-4 bg-ocean-500 text-white rounded font-bold hover:bg-ocean-400 transition">
                             Contrate a ID Singular
                         </button>
-                        <button class="px-8 py-4 border border-white text-white rounded font-bold hover:bg-white hover:text-deep-900 transition">
+                        <button
+                            class="px-8 py-4 border border-white text-white rounded font-bold hover:bg-white hover:text-deep-900 transition">
                             Assine nossa Newsletter
                         </button>
                     </div>
@@ -576,12 +1082,16 @@
             <section class="py-24 bg-deep-900">
                 <div class="max-w-7xl mx-auto px-4">
                     <h1 class="text-4xl font-bold text-white mb-4">Nossos Cases</h1>
-                    <p class="text-gray-400 mb-12 max-w-2xl">Histórias de transformação, desafios superados e resultados alcançados.</p>
+                    <p class="text-gray-400 mb-12 max-w-2xl">Histórias de transformação, desafios superados e resultados
+                        alcançados.</p>
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="cases-grid">
                         <!-- Case Item (Repeated via JS usually, hardcoded here for preview) -->
-                        <article class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer" onclick="openCaseModal('Banco Digital X')">
-                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" class="w-full h-48 object-cover">
+                        <article
+                            class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer"
+                            onclick="openCaseModal('Banco Digital X')">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
+                                class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <span class="text-xs text-ocean-300 uppercase font-bold">Fintech</span>
                                 <h3 class="text-xl font-bold text-white mt-2 mb-2">Banco Digital X</h3>
@@ -589,8 +1099,11 @@
                             </div>
                         </article>
 
-                        <article class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer" onclick="openCaseModal('Varejo Y')">
-                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" class="w-full h-48 object-cover">
+                        <article
+                            class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer"
+                            onclick="openCaseModal('Varejo Y')">
+                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80"
+                                class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <span class="text-xs text-ocean-300 uppercase font-bold">Varejo</span>
                                 <h3 class="text-xl font-bold text-white mt-2 mb-2">Varejo Y</h3>
@@ -598,8 +1111,11 @@
                             </div>
                         </article>
 
-                        <article class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer" onclick="openCaseModal('Indústria Z')">
-                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" class="w-full h-48 object-cover">
+                        <article
+                            class="bg-deep-800 rounded-xl overflow-hidden border border-white/5 hover:border-ocean-300/50 transition cursor-pointer"
+                            onclick="openCaseModal('Indústria Z')">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
+                                class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <span class="text-xs text-ocean-300 uppercase font-bold">Indústria</span>
                                 <h3 class="text-xl font-bold text-white mt-2 mb-2">Indústria Z</h3>
@@ -610,54 +1126,178 @@
 
                     <div class="mt-16 bg-ocean-900/20 p-8 rounded-xl text-center border border-ocean-300/20">
                         <h3 class="text-2xl font-bold text-white mb-4">Quer ser o próximo case de sucesso?</h3>
-                        <button onclick="showPage('contato')" class="bg-ocean-500 hover:bg-ocean-400 text-white px-8 py-3 rounded-full transition">Falar com Consultor</button>
+                        <button onclick="showPage('contato')"
+                            class="bg-ocean-500 hover:bg-ocean-400 text-white px-8 py-3 rounded-full transition">Falar
+                            com Consultor</button>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- PAGE: CONTEÚDOS (BLOG) -->
+        <!-- PAGE: CONTEÚDOS (BLOG LIST) -->
         <div id="page-conteudos" class="page-section hidden">
             <section class="py-24 bg-deep-900">
                 <div class="max-w-7xl mx-auto px-4">
                     <h1 class="text-4xl font-bold text-white mb-12">Conteúdos & Insights</h1>
-                    
+
                     <div class="grid md:grid-cols-3 gap-8">
-                        <div class="col-span-1 md:col-span-2 relative h-96 rounded-xl overflow-hidden cursor-pointer group">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-deep-900 via-deep-900/50 to-transparent p-8 flex flex-col justify-end">
+                        <div class="col-span-1 md:col-span-2 relative h-96 rounded-xl overflow-hidden cursor-pointer group"
+                            onclick="openBlogPost('O Futuro do Lifelong Learning')">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-deep-900 via-deep-900/50 to-transparent p-8 flex flex-col justify-end">
                                 <span class="text-ocean-300 font-bold mb-2">Destaque</span>
                                 <h2 class="text-3xl font-bold text-white mb-2">O Futuro do Lifelong Learning</h2>
-                                <p class="text-gray-300">Como adaptar sua empresa para a era da aprendizagem contínua.</p>
+                                <p class="text-gray-300">Como adaptar sua empresa para a era da aprendizagem contínua.
+                                </p>
                             </div>
                         </div>
-                        
+
                         <div class="bg-deep-800 p-6 rounded-xl border border-white/5 flex flex-col justify-center">
                             <h3 class="text-xl font-bold text-white mb-4">Assine nossa Newsletter</h3>
                             <p class="text-gray-400 mb-4 text-sm">Receba curadoria de conteúdo semanalmente.</p>
-                            <input type="email" placeholder="E-mail" class="bg-deep-900 border border-gray-700 rounded p-2 mb-2 text-white">
-                            <button class="bg-ocean-500 text-white py-2 rounded hover:bg-ocean-400 transition">Inscrever-se</button>
+                            <input type="email" placeholder="E-mail"
+                                class="bg-deep-900 border border-gray-700 rounded p-2 mb-2 text-white">
+                            <button
+                                class="bg-ocean-500 text-white py-2 rounded hover:bg-ocean-400 transition">Inscrever-se</button>
                         </div>
 
                         <!-- Posts Grid -->
-                        <article class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer">
+                        <article
+                            class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer"
+                            onclick="openBlogPost('Liderança na Era Digital')">
                             <span class="text-xs text-gray-500">05 Dez, 2023</span>
                             <h3 class="text-lg font-bold text-white mt-2 mb-2">Liderança na Era Digital</h3>
-                            <a href="#" class="text-ocean-300 text-sm hover:underline">Ler artigo →</a>
+                            <button class="text-ocean-300 text-sm hover:underline font-semibold">Ler artigo →</button>
                         </article>
-                         <article class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer">
+                        <article
+                            class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer"
+                            onclick="openBlogPost('Gamificação funciona?')">
                             <span class="text-xs text-gray-500">01 Dez, 2023</span>
                             <h3 class="text-lg font-bold text-white mt-2 mb-2">Gamificação funciona?</h3>
-                            <a href="#" class="text-ocean-300 text-sm hover:underline">Ler artigo →</a>
+                            <button class="text-ocean-300 text-sm hover:underline font-semibold">Ler artigo →</button>
                         </article>
-                         <article class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer">
+                        <article
+                            class="bg-deep-800 rounded-xl p-6 border border-white/5 hover:bg-deep-700 transition cursor-pointer"
+                            onclick="openBlogPost('Segurança Psicológica')">
                             <span class="text-xs text-gray-500">28 Nov, 2023</span>
                             <h3 class="text-lg font-bold text-white mt-2 mb-2">Segurança Psicológica</h3>
-                            <a href="#" class="text-ocean-300 text-sm hover:underline">Ler artigo →</a>
+                            <button class="text-ocean-300 text-sm hover:underline font-semibold">Ler artigo →</button>
                         </article>
                     </div>
                 </div>
             </section>
+        </div>
+
+        <!-- PAGE: BLOG POST SINGLE (NEW) -->
+        <div id="page-post-single" class="page-section hidden">
+            <!-- Article Header -->
+            <section class="pt-32 pb-16 bg-deep-900 relative">
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <span class="text-ocean-300 font-bold uppercase tracking-widest text-sm mb-4 block">Liderança &
+                        Inovação</span>
+                    <h1 id="post-title" class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Liderança
+                        na Era Digital: Soft Skills para o Gestor do Futuro</h1>
+                    <div class="flex items-center justify-center space-x-6 text-gray-400 text-sm">
+                        <div class="flex items-center">
+                            <i data-lucide="user" class="w-4 h-4 mr-2"></i>
+                            <span>Por Ana Silva</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                            <span>05 Dez, 2023</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
+                            <span>5 min de leitura</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Image -->
+            <div class="max-w-6xl mx-auto px-4 mb-16">
+                <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80" alt="Featured"
+                        class="w-full h-[500px] object-cover">
+                </div>
+            </div>
+
+            <!-- Content Body -->
+            <article class="max-w-3xl mx-auto px-4 pb-24 prose prose-lg prose-invert">
+                <p class="text-xl leading-relaxed text-gray-300 mb-8 font-light">
+                    O mundo corporativo passa por uma transformação sem precedentes. A tecnologia não muda apenas como
+                    trabalhamos, mas como lideramos. Neste cenário, o que define um líder de sucesso?
+                </p>
+
+                <h2>A Mudança de Paradigma</h2>
+                <p>
+                    Antigamente, liderança era sinônimo de comando e controle. O gestor detinha a informação e
+                    distribuía tarefas. Hoje, com a democratização da informação e a ascensão de times ágeis, o líder
+                    precisa atuar muito mais como um facilitador do que como um chefe tradicional.
+                </p>
+                <p>
+                    A era digital exige velocidade, adaptabilidade e, acima de tudo, humanidade. É paradoxal, mas quanto
+                    mais tecnologia inserimos nos processos, mais as competências essencialmente humanas (soft skills)
+                    se tornam diferenciais competitivos.
+                </p>
+
+                <blockquote>
+                    "A tecnologia pode otimizar processos, mas apenas pessoas inspiradas podem inovar e romper
+                    barreiras."
+                </blockquote>
+
+                <h3>As 3 Competências Essenciais</h3>
+                <ul>
+                    <li><strong>Inteligência Emocional:</strong> A capacidade de entender e gerenciar as próprias
+                        emoções e as da equipe é crucial para manter a saúde mental e o engajamento em ambientes de alta
+                        pressão.</li>
+                    <li><strong>Pensamento Crítico:</strong> Em um mar de dados, saber fazer as perguntas certas vale
+                        mais do que ter todas as respostas prontas.</li>
+                    <li><strong>Adaptabilidade (AQ):</strong> O Quociente de Adaptabilidade agora é tão importante
+                        quanto o QI. Aprender, desaprender e reaprender é a nova constante.</li>
+                </ul>
+
+                <h2>Como a ID Singular apoia essa jornada</h2>
+                <p>
+                    Nossos programas de desenvolvimento de liderança não focam apenas em ferramentas de gestão, mas na
+                    construção dessa mentalidade digital. Utilizamos nossa metodologia mandala para trabalhar o
+                    indivíduo no centro, expandindo para suas relações com o time e o impacto na organização.
+                </p>
+
+                <p>
+                    Preparar seus líderes para o futuro não é sobre ensiná-los a programar, mas ensiná-los a desbloquear
+                    o potencial humano em um mundo programável.
+                </p>
+
+                <!-- Share / Tags footer -->
+                <div class="border-t border-white/10 mt-12 pt-8 flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span
+                            class="bg-deep-800 text-ocean-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Liderança</span>
+                        <span
+                            class="bg-deep-800 text-ocean-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">RH</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-400 text-sm">Compartilhar:</span>
+                        <a href="#" class="text-white hover:text-ocean-300"><i data-lucide="linkedin"
+                                class="w-5 h-5"></i></a>
+                        <a href="#" class="text-white hover:text-ocean-300"><i data-lucide="twitter"
+                                class="w-5 h-5"></i></a>
+                        <a href="#" class="text-white hover:text-ocean-300"><i data-lucide="facebook"
+                                class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Back Button Sticky -->
+            <div class="fixed bottom-8 right-8 z-40">
+                <button onclick="showPage('conteudos')"
+                    class="bg-ocean-500 hover:bg-ocean-400 text-white rounded-full p-4 shadow-lg transition transform hover:scale-110 flex items-center gap-2">
+                    <i data-lucide="arrow-left"></i> Voltar ao Blog
+                </button>
+            </div>
         </div>
 
         <!-- PAGE: CONTATO -->
@@ -667,10 +1307,11 @@
                     <div>
                         <h1 class="text-4xl font-bold text-white mb-6">Vamos Conversar?</h1>
                         <p class="text-gray-300 mb-8">Estamos prontos para desenhar a próxima etapa da sua empresa.</p>
-                        
+
                         <div class="space-y-6">
                             <div class="flex items-center">
-                                <div class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
+                                <div
+                                    class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
                                     <i data-lucide="mail"></i>
                                 </div>
                                 <div>
@@ -679,7 +1320,8 @@
                                 </div>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
+                                <div
+                                    class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
                                     <i data-lucide="phone"></i>
                                 </div>
                                 <div>
@@ -688,7 +1330,8 @@
                                 </div>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
+                                <div
+                                    class="w-12 h-12 bg-deep-800 rounded-full flex items-center justify-center mr-4 text-ocean-300">
                                     <i data-lucide="map-pin"></i>
                                 </div>
                                 <div>
@@ -698,14 +1341,17 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="bg-deep-800 p-8 rounded-2xl border border-white/5 shadow-2xl">
                         <form class="space-y-4">
                             <div class="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="Nome" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
-                                <input type="text" placeholder="Sobrenome" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
+                                <input type="text" placeholder="Nome"
+                                    class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
+                                <input type="text" placeholder="Sobrenome"
+                                    class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
                             </div>
-                            <input type="email" placeholder="E-mail Corporativo" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
+                            <input type="email" placeholder="E-mail Corporativo"
+                                class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full">
                             <select class="bg-deep-900 border border-gray-700 rounded p-3 text-gray-300 w-full">
                                 <option>Motivo do Contato</option>
                                 <option>Orçamento Projeto</option>
@@ -713,8 +1359,11 @@
                                 <option>Trabalhe Conosco</option>
                                 <option>Imprensa</option>
                             </select>
-                            <textarea placeholder="Mensagem" rows="4" class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full"></textarea>
-                            <button class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-4 rounded transition">Enviar Mensagem</button>
+                            <textarea placeholder="Mensagem" rows="4"
+                                class="bg-deep-900 border border-gray-700 rounded p-3 text-white w-full"></textarea>
+                            <button
+                                class="w-full bg-ocean-500 hover:bg-ocean-400 text-white font-bold py-4 rounded transition">Enviar
+                                Mensagem</button>
                         </form>
                     </div>
                 </div>
@@ -724,16 +1373,20 @@
     </main>
 
     <!-- Modal for Cases (Simple Implementation) -->
-    <div id="case-modal" class="fixed inset-0 z-[60] hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="case-modal"
+        class="fixed inset-0 z-[60] hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-deep-800 max-w-2xl w-full rounded-2xl p-8 relative border border-white/10">
-            <button onclick="closeCaseModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i data-lucide="x"></i></button>
+            <button onclick="closeCaseModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i
+                    data-lucide="x"></i></button>
             <span class="text-ocean-300 text-sm font-bold uppercase mb-2 block">Case de Sucesso</span>
             <h2 id="modal-title" class="text-3xl font-bold text-white mb-4">Título do Case</h2>
             <div class="bg-gray-700 h-48 w-full rounded mb-6 flex items-center justify-center text-gray-500">
                 [Vídeo ou Imagem do Case]
             </div>
             <p class="text-gray-300 mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.
             </p>
             <div class="grid grid-cols-3 gap-4 mb-6 text-center border-t border-b border-white/10 py-4">
                 <div>
@@ -749,7 +1402,8 @@
                     <span class="text-xs text-gray-400">Duração</span>
                 </div>
             </div>
-            <button onclick="closeCaseModal()" class="w-full bg-white text-deep-900 font-bold py-3 rounded hover:bg-gray-200">Fechar</button>
+            <button onclick="closeCaseModal()"
+                class="w-full bg-white text-deep-900 font-bold py-3 rounded hover:bg-gray-200">Fechar</button>
         </div>
     </div>
 
@@ -758,11 +1412,18 @@
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-12 mb-12">
             <!-- Bloco 1 -->
             <div>
-                <span class="text-2xl font-bold text-white tracking-wider block mb-6">ID <span class="text-ocean-300">SINGULAR</span></span>
+                <span class="text-2xl font-bold text-white tracking-wider block mb-6">ID <span
+                        class="text-ocean-300">SINGULAR</span></span>
                 <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i
+                            data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i
+                            data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-deep-800 rounded-full flex items-center justify-center text-white hover:bg-ocean-500 transition"><i
+                            data-lucide="youtube" class="w-5 h-5"></i></a>
                 </div>
             </div>
 
@@ -770,9 +1431,11 @@
             <div>
                 <h4 class="text-white font-bold mb-6">Soluções</h4>
                 <ul class="space-y-3 text-gray-400 text-sm">
-                    <li><a href="#" onclick="showPage('educacao')" class="hover:text-ocean-300">Educação Corporativa</a></li>
+                    <li><a href="#" onclick="showPage('educacao')" class="hover:text-ocean-300">Educação Corporativa</a>
+                    </li>
                     <li><a href="#" onclick="showPage('cases')" class="hover:text-ocean-300">Cases de Sucesso</a></li>
-                    <li><a href="#" onclick="showPage('conteudos')" class="hover:text-ocean-300">Conteúdo & Blog</a></li>
+                    <li><a href="#" onclick="showPage('conteudos')" class="hover:text-ocean-300">Conteúdo & Blog</a>
+                    </li>
                 </ul>
             </div>
 
@@ -790,12 +1453,16 @@
             <div>
                 <h4 class="text-white font-bold mb-6">Contato & News</h4>
                 <ul class="space-y-3 text-gray-400 text-sm mb-6">
-                    <li class="flex items-center"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> contato@idsingular.com</li>
-                    <li class="flex items-center"><i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> (11) 99999-9999</li>
+                    <li class="flex items-center"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> contato@idsingular.com
+                    </li>
+                    <li class="flex items-center"><i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> (11)
+                        99999-9999</li>
                 </ul>
                 <div class="flex">
-                    <input type="email" placeholder="E-mail" class="w-full bg-deep-900 border border-gray-700 rounded-l px-3 py-2 text-white text-sm outline-none">
-                    <button class="bg-ocean-500 px-3 py-2 rounded-r text-white hover:bg-ocean-400"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    <input type="email" placeholder="E-mail"
+                        class="w-full bg-deep-900 border border-gray-700 rounded-l px-3 py-2 text-white text-sm outline-none">
+                    <button class="bg-ocean-500 px-3 py-2 rounded-r text-white hover:bg-ocean-400"><i
+                            data-lucide="arrow-right" class="w-4 h-4"></i></button>
                 </div>
             </div>
         </div>
@@ -830,9 +1497,18 @@
 
             // Close mobile menu if open
             const mobileMenu = document.getElementById('mobile-menu');
-            if(!mobileMenu.classList.contains('hidden')) {
+            if (!mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
             }
+        }
+
+        // --- Generic Blog Post Logic ---
+        function openBlogPost(title) {
+            // Update Title Dynamicly (Simulation)
+            if (title) {
+                document.getElementById('post-title').innerText = title;
+            }
+            showPage('post-single');
         }
 
         function scrollToSection(sectionId) {
@@ -868,14 +1544,14 @@
             for (let i = 0; i < bubbleCount; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                
+
                 const size = Math.random() * 60 + 20;
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
-                
+
                 bubble.style.left = `${Math.random() * 100}%`;
                 bubble.style.top = `${Math.random() * 100 + 100}%`;
-                
+
                 const duration = Math.random() * 10 + 10;
                 bubble.style.transition = `top ${duration}s linear, opacity ${duration}s ease-in`;
                 bubble.style.opacity = Math.random() * 0.1;
@@ -900,7 +1576,7 @@
         }
 
         // --- Intersection Observer for Fade In ---
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             createBubbles();
 
             const observerOptions = {
@@ -926,4 +1602,5 @@
 
     </script>
 </body>
+
 </html>
